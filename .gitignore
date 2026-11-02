@@ -1,3 +1,4 @@
 uploads/
-cdn
+drummercdn
 .delete-token
+deploy.sh
