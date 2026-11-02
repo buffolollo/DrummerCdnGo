@@ -73,8 +73,6 @@ curl -H "Range: bytes=0-1023" http://localhost:1211/uploads/mp3/track.mp3
 
 ## Recommended improvements (NOT applied, to keep behavior identical)
 
-- Read the delete token from an environment variable instead of a source
-  constant.
 - Return `401 Unauthorized` for a wrong token instead of hanging forever.
 - Use `DELETE` (or `POST`) for the destructive delete-all operation instead of
   `GET`.
