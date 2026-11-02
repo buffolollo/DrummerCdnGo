@@ -9,9 +9,6 @@ import (
 	"strings"
 )
 
-// Package-level constant on purpose; the original did not read this from env.
-const deleteToken = "aNs54If4sdfG4e68f4eGsa65f4Ese65Rf4se65fe4es65f4es65f4"
-
 func deleteAllHandler(w http.ResponseWriter, r *http.Request) {
 	auth := r.Header.Get("Authorization")
 	if auth == "" {
@@ -27,7 +24,20 @@ func deleteAllHandler(w http.ResponseWriter, r *http.Request) {
 		token = parts[1]
 	}
 
-	if token != deleteToken {
+	deleteToken, err := os.ReadFile(".delete-token")
+	if err != nil {
+		log.Printf("read delete token: %v", err)
+		http.Error(w, "Delete token is not configured", http.StatusServiceUnavailable)
+		return
+	}
+	configuredToken := strings.TrimSpace(string(deleteToken))
+	if configuredToken == "" {
+		log.Println("delete token is not configured")
+		http.Error(w, "Delete token is not configured", http.StatusServiceUnavailable)
+		return
+	}
+
+	if token != configuredToken {
 		// Preserved quirk: the original never wrote a response on a bad token,
 		// so the request hangs until the client goes away. Do not write here.
 		<-r.Context().Done()

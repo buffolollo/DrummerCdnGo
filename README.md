@@ -39,7 +39,7 @@ curl -F "song=@track.mp3" http://localhost:1211/upload
 curl http://localhost:1211/upload/files
 
 # Delete all stored songs (the token is a fixed package constant)
-curl -H "Authorization: Bearer as54f4sdf4e68f4esa65f4se65f4se65fe4es65f4es65f4" \
+curl -H "Authorization: Bearer YOUR_DELETE_TOKEN" \
   http://localhost:1211/upload/deleteall
 
 # Static audio file (supports HTTP Range for streaming)
