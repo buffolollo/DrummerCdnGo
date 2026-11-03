@@ -38,7 +38,10 @@ curl -F "song=@track.mp3" http://localhost:1211/upload
 # List all stored songs
 curl http://localhost:1211/upload/files
 
-# Delete all stored songs (the token is a fixed package constant)
+# Delete a single stored song (the token is in .delete-token)
+curl "http://localhost:1211/files/delete?filename=track.mp3&token=YOUR_DELETE_TOKEN"
+
+# Delete all stored songs (the token is in .delete-token)
 curl -H "Authorization: Bearer YOUR_DELETE_TOKEN" \
   http://localhost:1211/upload/deleteall
 

@@ -33,6 +33,7 @@ func main() {
 	mux.HandleFunc("POST /upload", uploadHandler)
 	mux.HandleFunc("POST /upload/{$}", uploadHandler)
 	mux.HandleFunc("GET /files", listFilesHandler)
+	mux.HandleFunc("GET /files/delete", deleteFileHandler)
 	mux.HandleFunc("GET /deleteall", deleteAllHandler)
 
 	// express.static emulation. StripPrefix removes /uploads, leaving a rooted
